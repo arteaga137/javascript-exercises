@@ -1,0 +1,23 @@
+<!-- Basandote en el siguiente html, añade un evento 'focus' que ejecute un console.log con el valor del input. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Events Exercise 2</title>
+</head>
+<body>
+  <input type="text"/>
+  <script>
+    // Seleccionar la caja de texto
+    const input = document.querySelector('input');
+    
+    // añadir el eventListener que muestre en consola lo que se escriba en la caja de texto
+    input.addEventListener('focus', function() {
+      console.log(`El valor del input es: ${input.value}`);
+    });
+  </script>
+</body>
+</html>
