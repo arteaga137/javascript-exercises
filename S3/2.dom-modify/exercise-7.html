@@ -1,0 +1,32 @@
+<!-- Basandote en el siguiente html, elimina todos los nodos que tengan la clase .fn-remove-me -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM exercise 7</title>
+</head>
+<body>
+   <p class="fn-remove-me">Eliminame!</p>
+   <p>No me elimines!</p>
+   <p>No me elimines!</p>
+   <p class="fn-remove-me">Eliminame!</p>
+   <p>No me elimines!</p>
+   <p class="fn-remove-me">Eliminame!</p>
+   <p class="fn-remove-me">Eliminame!</p>
+   <p>No me elimines!</p>
+
+   <script>
+    // Seleccionar los nodos a eliminar
+    const ElementosAEliminar = document.querySelectorAll('.fn-remove-me');
+
+    // Eliminar nodos
+ElementosAEliminar.forEach(elemento => {
+    elemento.remove();
+});
+
+   </script>
+</body>
+</html>

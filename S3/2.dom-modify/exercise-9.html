@@ -1,0 +1,31 @@
+<!-- Basandote en el siguiente html y javascript,inserta p con el texto 'Voy dentro!', dentro de todos los div con la clase .fn-insert-here -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Modify Exercise 9</title>
+</head>
+<body>
+   <div class="fn-insert-here"></div>
+   <div></div>
+   <div class="fn-insert-here"></div>
+   <div>Aqui no va un p</div>
+   <script>
+    // Seleccionar todos los divs
+    const divs = document.querySelectorAll('.fn-insert-here');
+    
+    // agregar parrafo a todos los divs con la clase 'fn-insert-here'
+    divs.forEach(div => {
+        // crear parrafo y asignarle texto
+        const parrafo = document.createElement('p');
+        parrafo.textContent = 'Voy dentro!';
+        // Insertar parrafo en cada div
+        div.appendChild(parrafo);
+    });
+
+</script>
+</body>
+</html>
