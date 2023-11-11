@@ -1,0 +1,29 @@
+<!-- // Dado el siguiente html y javascript, utiliza .filter() para mostrar por consola los streamers que incluyan la palabra
+//  introducida en el input. De esta forma, si introduzco 'Ru' me deberia de mostrar solo el streamer 'Rubius'. Si
+//   introduzco 'i', me deberia de mostrar el streamer 'Rubius' e 'Ibai'. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" data-function="toFilterStreamers" />
+    <script>
+      const streamers = [{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'}, {name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'}, {name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'}, {name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}];
+      
+      // Seleccionar la caja de texto por su atributo, añado un evento que al tipear pase el valor a una variable, que a su vez filtra el array con el mismo valor.
+      document.querySelector('[data-function="toFilterStreamers"]').addEventListener('input', ({target}) => {
+        const filteredStreamers = streamers.filter(({name}) => 
+          name.toLowerCase().includes(target.value.toLowerCase()) //añado el metodo toLowerCase para asegurarme que filtrará sin importar si hay o no mayusculas
+        );
+        console.log(filteredStreamers);
+      });
+    </script>
+  </body>
+</html>
