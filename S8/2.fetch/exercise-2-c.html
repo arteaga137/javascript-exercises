@@ -1,0 +1,78 @@
+<!-- En base al ejercicio anterior. Crea dinamicamente un elemento <p> por cada petición a la api que diga...'El nombre X tiene un Y porciento de ser de Z' etc etc.
+
+EJ: El nombre Abel tiene un 22 porciento de ser de ET y un 6 porciento de ser de MZ. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="nameInput" />
+    <button id="button">Consultar</button>
+    <script>
+      const baseUrl = "https://api.nationalize.io?name=";
+
+      // Seleccionar el boton
+
+      const button = document.querySelector("#button");
+
+      // Seleccionar el input
+
+      const input = document.querySelector("#nameInput");
+
+      // Crear una funcion que realice la solicitud a la API
+
+      function fetchNationality(name) {
+        const url = baseUrl + name; // toma la url del api, y agrega el nombre (valor del input)
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("no se pudo conectar con la API");
+            }
+            return response.json(); // Convierto los datos a JSON
+          })
+          .then((data) => {
+            console.log(data); // Muestro en consola los datos
+            createParagraph(data); // creo el parrafo con los datos
+          })
+          .catch((error) => {
+            console.error("Error: ", error);
+          });
+      }
+
+      // Crear una funcion que cree parrafos con los datos que arroja la API, para luego usarla dentro de la funcion de solicitud de la API
+
+      //Uso el parametro data, para luego usar el mismo parametro dentro de la funcion fetchNationality
+      function createParagraph(data) {
+        const para = document.createElement("p");
+        let text = `El nombre "${data.name}" tiene `; // creo una variable que busque la propiedad 'name' en el objeto 'data', y lo imprimo usando un boilerplate
+        // Hago un forEach para recorrer cada pais que trae la data dada por el API
+        data.country.forEach((country, index) => {
+          text += `${(country.probability * 100).toFixed(2)}% de ser de ${country.country_id}`; // por cada pais del objeto, uso la variable text y le agrego la probabilidad del pais, la multiplico por 100 (para convertirlo a porcentaje) y uso 'toFixed(2)' para limitar a 2 decimales, luego imprimo el id del pais en el objeto
+          if (index < data.country.length - 1) {
+            text += " y "; // agrega paises al parrafo hasta que alcanza el largo del objeto
+          }
+        });
+        para.textContent = text; //asigno el texto obtenido al parrafo creado
+        // Crear el boton 'X' para eliminar el parrafo
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'X';
+        closeButton.style.marginLeft = '10px'; //añado estilos para asegurarme que el boton este a la derecha del texto
+        // añadir evento al boton para que elimine el parrafo
+        closeButton.addEventListener('click', function() {
+            para.remove(); //elimina el parrafo
+        });
+        document.body.appendChild(para); // a;ado el elemento al DOM (al body del HTML)
+        para.appendChild(closeButton); // añado el boton de cerrar al parrafo
+      }
+
+      // crear el evento al boton que llame a la funcion que realice la solicitud a la API
+
+      button.addEventListener("click", function () {
+        fetchNationality(input.value);
+      });
+    </script>
+  </body>
+</html>
